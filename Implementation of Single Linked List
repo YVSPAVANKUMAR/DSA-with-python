@@ -1,0 +1,104 @@
+class  Node:
+    def __init__(self,data):
+        self.data=data
+        self.next=None
+class LinkedList:
+    def __init__(self):
+        self.head=None
+    def insertfront(self,data):   # to insert at the front of the linked list
+        newnode = Node(data)
+        newnode.next=self.head
+        self.head=newnode
+    def insertposition(self,pos,data):
+        newnode =Node(data)
+        t1=self.head
+        while(pos>1):
+            t1=t1.next
+            pos-=1
+        t2=t1.next
+        t1.next=newnode
+        newnode.next=t2
+    def insertend(self,data):     #to insert at the end of the Linked List
+        newnode=Node(data)
+        if self.head==None:
+            self.head=newnode
+        else:
+            t=self.head
+            while t.next!=None:
+                t=t.next
+            t.next=newnode
+    def deletefront(self):
+        t=self.head
+        self.head=t.next
+    def deleteend(self):
+        t1=self.head
+        t2=t1.next
+        while t2.next != None:
+            t2=t2.next
+            t1=t1.next
+        t1.next=None
+    def deleteposition(self,pos):
+        t1=self.head
+        while(pos>1):
+            t1=t1.next
+            pos-=1
+        t2=t1.next
+        t1.next=t2.next
+    def sizeoflist(self):
+        t=self.head
+        c=0
+        while t!=None:
+            t=t.next
+            c+=1
+        return c
+    def  display(self):
+        t=self.head
+        if t==None:
+            print("List is empty")
+        while t!=None:
+            print(t.data,end=" ")
+            t=t.next
+       
+ob=LinkedList()
+while True:
+    print("\n1.insert node at the end\n2.insert at the front\n3.insert at the position\n4.deletefront\n5.deleteend\n6.deleteposition\n7.size of the list\n8.display\n9.exit")
+    a=int(input("Enter your choice:"))
+    if  a==1:
+        data=int(input("Enter data:"))
+        ob.insertend(data)
+    elif a==2:
+        data=int(input("Enter data:"))
+        ob.insertfront(data)
+    elif a==3:
+           
+            pos=int(input("Enter position:"))
+            len=ob.sizeoflist()
+            if len>pos:
+                data=int(input("Enter data:"))
+                ob.insertposition(pos,data)
+            else:
+                print("out of range")
+    elif a==4:
+        if ob.head==None:
+            print("List is empty")
+        else:
+            ob.deletefront()
+       
+    elif a==5:
+        if ob.head==None:
+            print("List is empty")
+        else:
+            ob.deleteend()
+    elif a==6:
+        if ob.head==None:
+            print("List is empty")
+        else:
+            pos=int(input("Enter position to delete:"))
+            ob.deleteposition(pos)
+    elif a==7:
+        ob.sizeoflist()
+    elif a==8:
+        ob.display()
+    else:
+        print("Exit the programme")
+        break
